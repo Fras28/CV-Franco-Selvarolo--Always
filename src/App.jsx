@@ -13,12 +13,16 @@ import {
   ShieldCheck, 
   Zap,
   Download,
-  MousePointer2
+  MousePointer2,
+  MessageCircle
 } from 'lucide-react';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('inicio');
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  const phoneNumber = "2915729501";
+  const whatsappUrl = `https://wa.me/54${phoneNumber}?text=Hola%20Franco,%20vimos%20tu%20perfil%20para%20Always%20Rentacar%20y%20nos%20gustaría%20contactarte.`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,11 +88,13 @@ const App = () => {
               Descargar CV
             </a>
             <a 
-              href="mailto:f.selvarolo@gmail.com"
-              className="bg-blue-900 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-800 transition transform hover:scale-105 shadow-xl shadow-blue-900/20 active:scale-95 flex items-center gap-2"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-green-700 transition transform hover:scale-105 shadow-xl shadow-green-600/20 active:scale-95 flex items-center gap-2"
             >
-              <Mail size={16} />
-              <span className="hidden sm:inline">Contactar</span>
+              <MessageCircle size={16} />
+              <span className="hidden sm:inline">WhatsApp</span>
             </a>
           </div>
         </div>
@@ -120,12 +126,11 @@ const App = () => {
                 <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
               </button>
               <a 
-                href="src/assets/pdfs/Cv-Franco Selvarolo.pdf"
-                download
-                className="sm:hidden flex items-center gap-2 bg-slate-100 text-slate-700 px-6 py-4 rounded-2xl text-sm font-bold border border-slate-200"
+                href={`tel:${phoneNumber}`}
+                className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-800 transition shadow-xl"
               >
-                <Download size={18} />
-                Descargar CV
+                <Phone size={18} />
+                Llamar Ahora
               </a>
             </div>
           </div>
@@ -287,13 +292,31 @@ const App = () => {
         <div className="max-w-4xl mx-auto text-center space-y-12">
           <div className="space-y-4">
             <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-tight">¿Listo para expandir el mercado regional?</h2>
-            <p className="text-xl text-slate-500 font-medium">Disponible para entrevista presencial en Bahía Blanca.</p>
+            <p className="text-xl text-slate-500 font-medium">Disponible para contacto inmediato.</p>
           </div>
           
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <a href="mailto:f.selvarolo@gmail.com" className="flex items-center space-x-3 bg-blue-900 text-white px-10 py-5 rounded-2xl hover:bg-blue-800 transition shadow-xl w-full md:w-auto justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href={`tel:${phoneNumber}`} className="flex items-center space-x-3 bg-slate-900 text-white px-10 py-5 rounded-2xl hover:bg-slate-800 transition shadow-xl justify-center group">
+              <Phone size={20} className="group-hover:rotate-12 transition-transform" />
+              <div className="text-left">
+                <p className="text-[10px] uppercase font-black opacity-60">Llamada Directa</p>
+                <p className="font-black tracking-widest text-sm">{phoneNumber}</p>
+              </div>
+            </a>
+            
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 bg-green-600 text-white px-10 py-5 rounded-2xl hover:bg-green-700 transition shadow-xl justify-center group">
+              <MessageCircle size={20} className="group-hover:scale-110 transition-transform" />
+              <div className="text-left">
+                <p className="text-[10px] uppercase font-black opacity-60">WhatsApp Business</p>
+                <p className="font-black tracking-widest text-sm">Enviar Mensaje</p>
+              </div>
+            </a>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-4">
+            <a href="mailto:fselvarolo28@gmail.com" className="flex items-center space-x-3 bg-blue-900 text-white px-10 py-5 rounded-2xl hover:bg-blue-800 transition shadow-xl w-full md:w-auto justify-center">
               <Mail size={20} />
-              <span className="font-black uppercase tracking-widest text-sm">f.selvarolo@gmail.com</span>
+              <span className="font-black uppercase tracking-widest text-sm">fselvarolo28@gmail.com</span>
             </a>
             <a 
               href="src/assets/pdfs/Cv-Franco Selvarolo.pdf"
@@ -301,7 +324,7 @@ const App = () => {
               className="flex items-center space-x-3 bg-slate-100 text-slate-900 px-10 py-5 rounded-2xl hover:bg-slate-200 transition border border-slate-200 w-full md:w-auto justify-center"
             >
               <Download size={20} />
-              <span className="font-black uppercase tracking-widest text-sm">Descargar PDF</span>
+              <span className="font-black uppercase tracking-widest text-sm">Descargar CV</span>
             </a>
           </div>
           
@@ -310,6 +333,19 @@ const App = () => {
           </div>
         </div>
       </footer>
+
+      {/* Barra Flotante de Contacto Móvil */}
+      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50 bg-white/80 backdrop-blur-xl border border-slate-200 p-2 rounded-2xl shadow-2xl">
+         <a href={`tel:${phoneNumber}`} className="bg-slate-900 text-white p-4 rounded-xl shadow-lg active:scale-90 transition-transform">
+            <Phone size={20} />
+         </a>
+         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-green-600 text-white p-4 rounded-xl shadow-lg active:scale-90 transition-transform">
+            <MessageCircle size={20} />
+         </a>
+         <a href="mailto:fselvarolo28@gmail.com" className="bg-blue-900 text-white p-4 rounded-xl shadow-lg active:scale-90 transition-transform">
+            <Mail size={20} />
+         </a>
+      </div>
 
     </div>
   );
